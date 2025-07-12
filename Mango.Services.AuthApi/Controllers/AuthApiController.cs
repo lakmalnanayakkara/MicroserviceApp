@@ -18,7 +18,7 @@ namespace Mango.Services.AuthApi.Controllers
             _authService = authService;
             _configuration = configuration;
             //_messageBus = messageBus;
-            _response = new();
+            _response = new ResponseDTO();
         }
 
 
@@ -27,13 +27,13 @@ namespace Mango.Services.AuthApi.Controllers
         public async Task<IActionResult> Register([FromBody] RegistrationRequestDTO registrationRequestDTO)
         {
 
-            var errorMessage = await _authService.Register(registrationRequestDTO);
-            if (!string.IsNullOrEmpty(errorMessage))
+            var response = await _authService.Register(registrationRequestDTO);
+            /*if (!string.IsNullOrEmpty(errorMessage))
             {
                 _response.IsSuccess = false;
                 _response.Message = errorMessage;
                 return BadRequest(_response);
-            }
+            }*/
             //await _messageBus.PublishMessage(model.Email, _configuration.GetValue<string>("TopicAndQueueNames:RegisterUserQueue"));
             return Ok(_response);
         }
