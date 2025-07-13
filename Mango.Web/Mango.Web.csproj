@@ -9,10 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Cart\" />
+	<PackageReference Include="IdentityModel" Version="6.0.0" />
   </ItemGroup>
 
 </Project>

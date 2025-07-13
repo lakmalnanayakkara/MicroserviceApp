@@ -1,4 +1,6 @@
+using IdentityModel;
 using Mango.Web.Models;
+using Mango.Web.Models.Cart;
 using Mango.Web.Models.Product;
 using Mango.Web.Service.IService;
 using Microsoft.AspNetCore.Authorization;
@@ -11,11 +13,12 @@ namespace Mango.Web.Controllers
     public class HomeController : Controller
     {
         private readonly IProductService _productService;
-        //private readonly ICartService _cartService;
-        public HomeController(IProductService productService)
+        private readonly ICartService _cartService;
+        public HomeController(IProductService productService, ICartService cartService)
         {
             _productService = productService;
-            //_cartService = cartService;
+            _cartService = cartService;
+            _cartService = cartService;
         }
 
 
@@ -57,29 +60,29 @@ namespace Mango.Web.Controllers
         }
 
 
-        /*[Authorize]
+        [Authorize]
         [HttpPost]
         [ActionName("ProductDetails")]
         public async Task<IActionResult> ProductDetails(ProductDTO productDto)
         {
-            CartDto cartDto = new CartDto()
+            CartDTO cartDto = new CartDTO()
             {
-                CartHeader = new CartHeaderDto
+                CartHeader = new CartHeaderDTO
                 {
                     UserId = User.Claims.Where(u => u.Type == JwtClaimTypes.Subject)?.FirstOrDefault()?.Value
                 }
             };
 
-            CartDetailsDto cartDetails = new CartDetailsDto()
+            CartDetailsDTO cartDetails = new CartDetailsDTO()
             {
                 Count = productDto.Count,
                 ProductId = productDto.ProductId,
             };
 
-            List<CartDetailsDto> cartDetailsDtos = new() { cartDetails };
+            List<CartDetailsDTO> cartDetailsDtos = new() { cartDetails };
             cartDto.CartDetails = cartDetailsDtos;
 
-            ResponseDto? response = await _cartService.UpsertCartAsync(cartDto);
+            ResponseDTO? response = await _cartService.UpsertCartAsync(cartDto);
 
             if (response != null && response.IsSuccess)
             {
@@ -92,7 +95,7 @@ namespace Mango.Web.Controllers
             }
 
             return View(productDto);
-        }*/
+        }
 
 
         public IActionResult Privacy()
